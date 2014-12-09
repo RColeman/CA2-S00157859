@@ -1,0 +1,43 @@
+﻿@model CA2.Models.Movie
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+    <h2>@ViewBag.PageTitle</h2>
+    <div class="lead">
+        @Html.DisplayNameFor(model => model.Title)
+    </div>
+
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors[0].Screename)
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model.Actors)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Screename)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditActor", new { id = item.ActorId }, new { @class = "btn btn-info btn-xs" })
+                        @Html.ActionLink("Delete", "DeleteActor", new { id = item.ActorId }, new { @class = "btn btn-danger btn-xs" })
+                    </td>
+                </tr>
+            }
+        }   @* closing of if *@
+    </table>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+</div>

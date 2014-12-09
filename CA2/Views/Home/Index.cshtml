@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CA2.Models.Movie>
+
+
+<div class="container">
+
+    </div>
+    <h2>@ViewBag.PageTitle</h2>
+    <p>
+        @Html.ActionLink("Create New Movie", "Create", null, new { @class = "btn btn-success" })
+    </p>
+    <table class="table table-condensed table-striped">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.ActionLink("Opening Date", null, new { sortOrder = @ViewBag.dateOrder })
+            </th>
+            <th>@Html.ActionLink("Actors", null, new { sortOrder = @ViewBag.numOrder })</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @if (item.Actors.Count == 0)
+                    {
+                        <p style="margin: 0px">None</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Actors.Count)
+                    }
+
+                </td>
+                <td>
+                    @Html.ActionLink("Add", "Add", new { id = item.MovieId }, new { @class = "btn btn-info btn-xs" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }, new { @class = "btn btn-info btn-xs" })
+                    @Html.ActionLink("Details", "Details", new { id = item.MovieId }, new { @class = "btn btn-info btn-xs" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MovieId }, new { @class = "btn btn-danger btn-xs" })
+                </td>
+            </tr>
+        }
+      
+
+    </table>
+
+
+
